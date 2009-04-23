@@ -19,7 +19,11 @@ class <%= class_name %> < ActiveRecord::Base
       case filter
       <%- if !ton.nil? -%>
       when :text
-        {:conditions => ["<%= file_name.pluralize %>.<%= ton %> ILIKE ?", "%#{value}%"]}
+        {:conditions => ["<%= file_name.pluralize %>.<%= ton %> LIKE ?", "%#{value}%"]}
+      <%- end -%>
+      <%- if options[:translatable] -%>
+      when :locale
+        {:conditions => {:locale => value}}
       <%- end -%>
       <%- if has_published_at -%>
       when :publish_start
