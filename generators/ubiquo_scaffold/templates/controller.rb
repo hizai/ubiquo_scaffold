@@ -45,7 +45,7 @@ class Ubiquo::<%= controller_class_name %>Controller < UbiquoAreaController
   def edit
     @<%= file_name %> = <%= class_name %>.find(params[:id])
     <%- if options[:translatable] %>
-      redirect_to(ubiquo_<%= table_name %>_path) unless @<%= file_name %>.locale == Locale.current
+    redirect_to(ubiquo_<%= table_name %>_path) unless @<%= file_name %>.locale == Locale.current
     <%- end %>
   end
 
