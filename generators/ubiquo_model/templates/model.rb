@@ -19,7 +19,7 @@ class <%= class_name %> < ActiveRecord::Base
       case filter
       <%- if !ton.nil? -%>
       when :text
-        {:conditions => ["<%= file_name.pluralize %>.<%= ton %> LIKE ?", "%#{value}%"]}
+        {:conditions => ["upper(<%= file_name.pluralize %>.<%= ton %>) LIKE upper(?)", "%#{value}%"]}
       <%- end -%>
       <%- if options[:translatable] -%>
       when :locale
