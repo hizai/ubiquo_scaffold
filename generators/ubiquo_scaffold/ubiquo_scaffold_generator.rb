@@ -283,6 +283,10 @@ class UbiquoScaffoldGenerator < Rails::Generator::NamedBase
           File.join('app/views/ubiquo', controller_class_path, controller_file_name, "_#{partial}.html.erb")
         )
       end
+      m.template(
+        "_view_model_show.html.erb",
+        File.join('app/views/ubiquo', controller_class_path, controller_file_name, "_#{singular_name}.html.erb")
+        )
       
       for locale in Ubiquo::Config.get(:supported_locales)
         m.template(
@@ -328,10 +332,16 @@ class UbiquoScaffoldGenerator < Rails::Generator::NamedBase
              "Don't add timestamps to the migration file for this model") { |v| options[:skip_timestamps] = v }
       opt.on("--skip-migration",
              "Don't generate a migration file for this model") { |v| options[:skip_migration] = v }
+      opt.on("--versionable",
+             "Creates a versionable model") { |v| options[:versionable] = v}
+      opt.on("--max-versions-amount [N]", Integer,
+             "Set max versions amount for versionable models") { |v| options[:versions_amount] = v}
+      opt.on("--translatable f1,f2...", Array,
+        "Creates a translatable model") { |v| options[:translatable] = v}
     end
 
     def scaffold_views
-      %w[ index new edit ]
+      %w[ index new edit show ]
     end
     def scaffold_partials
       %w[ form submenu title ]

@@ -1,6 +1,11 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 class Ubiquo::<%= controller_class_name %>ControllerTest < ActionController::TestCase
+  <%- if options[:versionable] -%>
+  def setup
+    session[:locale] = "en_US"
+  end
+  <%- end -%>
   def test_should_get_index
     get :index
     assert_response :success
@@ -42,7 +47,7 @@ class Ubiquo::<%= controller_class_name %>ControllerTest < ActionController::Tes
   def <%= file_name %>_attributes(options = {})
     default_options = {
       <% for attribute in attributes -%>
-        :<%= attribute.name %> => "", # <%= attribute.type.to_s %>
+        :<%= attribute.name %> => '<%= attribute.default %>', # <%= attribute.type.to_s %>
       <% end -%>
     }
     default_options.merge(options)  

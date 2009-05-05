@@ -10,6 +10,7 @@ class UbiquoModelGenerator < Rails::Generator::NamedBase
       # TODO: Move this to yaml file if if grows to big overtime
       @field_translations = { 
         'title' => { :ca => 'Títol', :es => 'Título'},
+        'name' => { :ca => 'Nom', :es => 'Nombre'},
         'published_at' => { :ca => 'Data de publicació', :es => 'Fecha de publicación' }
       }
       
@@ -65,6 +66,12 @@ class UbiquoModelGenerator < Rails::Generator::NamedBase
              "Don't generate a migration file for this model") { |v| options[:skip_migration] = v }
       opt.on("--skip-fixture",
              "Don't generation a fixture file for this model") { |v| options[:skip_fixture] = v}
+      opt.on("--versionable",
+             "Creates a versionable model") { |v| options[:versionable] = v}
+      opt.on("--max-versions-amount [N]", Integer,
+             "Set max versions amount for versionable models") { |v| options[:versions_amount] = v}
+      opt.on("--translatable f1,f2...", Array,
+        "Creates a translatable model") { |v| options[:translatable] = v}
     end
 end
 
