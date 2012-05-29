@@ -10,7 +10,7 @@
   content_id: 1
 <% end -%>
 <% if options[:translatable] -%>
-  locale: 'en_US'
+  locale: 'en'
 <% end -%>
 <% if options[:versionable] -%>
   version_number: <%= @i ||= 0; (@i+=1).to_s %>

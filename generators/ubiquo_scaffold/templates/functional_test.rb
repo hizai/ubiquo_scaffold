@@ -4,7 +4,7 @@ class Ubiquo::<%= controller_class_name %>ControllerTest < ActionController::Tes
 
   <%- if options[:translatable] -%>
   def setup
-    session[:locale] = "en_US"
+    session[:locale] = "en"
   end
   
   <%- end -%>
